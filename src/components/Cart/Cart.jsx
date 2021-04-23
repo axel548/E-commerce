@@ -15,8 +15,9 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
         </Typography>
     );
 
+    if (!cart.line_items) return 'Loading....';
 
-    const FilledCart = () => {
+    const FilledCart = () => (
         <>
             <Grid container spacing={3}>
                 {cart.line_items.map((item) => (
@@ -33,9 +34,8 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                 </div>
             </div>
         </>
-    };
+    );
 
-    if (!cart.line_items) return 'Loading....';
 
     return (
         <Container>
@@ -43,7 +43,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
             <Typography className={classes.title} variant="h3" gutterBottom>
                 Your Shopping Cart
             </Typography>
-            {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+            {!cart.line_items.length ? EmptyCart() : FilledCart()}
         </Container>
     );
 };
